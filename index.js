@@ -9,12 +9,15 @@ document.onreadystatechange = () => {
       );
       const result = filterDataByDay(data, yearInputValue);
       fillBirthdays(result);
-      console.log(result);
     });
 
     const fillBirthdays = birthdayData => {
       Object.keys(birthdayData).forEach(day => {
         const dayDiv = document.getElementById(day);
+        if (dayDiv.hasChildNodes()) {
+          dayDiv.innerHTML = "";
+          return false;
+        }
         birthdayData[day].forEach(({ name }) => {
           const boxDiv = document.createElement("div");
           boxDiv.setAttribute("class", "box");
@@ -74,7 +77,28 @@ document.onreadystatechange = () => {
 
     const getNumberOfBox = n =>
       100 / Math.sqrt(Math.pow(Math.ceil(Math.sqrt(n)), 2));
-    const getRandomColor = () =>
-      "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+    const getRandomColor = () => {
+      var lum = -0.25;
+      var hex = String(
+        "#" +
+          Math.random()
+            .toString(16)
+            .slice(2, 8)
+            .toUpperCase()
+      ).replace(/[^0-9a-f]/gi, "");
+      if (hex.length < 6) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+      }
+      var rgb = "#",
+        c,
+        i;
+      for (i = 0; i < 3; i++) {
+        c = parseInt(hex.substr(i * 2, 2), 16);
+        c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
+        rgb += ("00" + c).substr(c.length);
+      }
+      return rgb;
+    };
+    // "#" + (((1 << 24) * Math.random()) | 0).toString(16);
   }
 };
