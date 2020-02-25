@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Birthday Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="body-title">Birthday Calendar</div>
+    <div class="day-container">
+      <div class="day-block">
+        <div class="day">MON</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="mon"></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day">TUE</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="tue"></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day">WED</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="wed"></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day">THU</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="thu"></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day">FRI</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="fri"></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day">SAT</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="sat"></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day">SUN</div>
+        <div class="bday-wrapper">
+          <div class="inner" id="sun"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <textarea name="" id="json-data" cols="30" rows="10">
+            [
+            {
+                "name": "Tyrion Lannister",
+                "birthday": "12/02/1978"
+            },
+            {
+                "name": "Cersei Lannister",
+                "birthday": "11/30/1975"
+            },
+            {
+                "name": "Daenerys Targaryen",
+                "birthday": "11/24/1991"
+            },
+            {
+                "name": "Arya Stark",
+                "birthday": "11/25/1996"
+            },
+            {
+                "name": "Jon Snow",
+                "birthday": "12/03/1989"
+            },
+            {
+                "name": "Sansa Stark",
+                "birthday": "15/08/1992"
+            },
+            {
+                "name": "Jorah Mormont",
+                "birthday": "12/16/1968"
+            },
+            {
+                "name": "Jaime Lannister",
+                "birthday": "12/06/1975"
+            },
+            {
+                "name": "Sandor Clegane",
+                "birthday": "11/07/1969"
+            },
+            {
+                "name": "Tywin Lannister",
+                "birthday": "10/12/1951"
+            },
+            {
+                "name": "Theon Greyjoy",
+                "birthday": "12/31/1989"
+            },
+            {
+                "name": "Samwell Tarly",
+                "birthday": "12/07/1990"
+            },
+            {
+                "name": "Joffrey Baratheon",
+                "birthday": "06/12/1992"
+            },
+            {
+                "name": "Catelyn Stark",
+                "birthday": "12/03/1962"
+            },
+            {
+                "name": "Bran Stark",
+                "birthday": "12/02/1995"
+            },
+            {
+                "name": "Petyr Baelish",
+                "birthday": "11/20/1974"
+            },
+            {
+                "name": "Robb Stark",
+                "birthday": "11/28/1986"
+            },
+            {
+                "name": "Brienne of Tarth",
+                "birthday": "11/27/1985"
+            },
+            {
+                "name": "Margaery Tyrell",
+                "birthday": "12/02/1989"
+            },
+            {
+                "name": "Stannis Baratheon",
+                "birthday": "09/14/1971"
+            },
+            {
+                "name": "Davos Seaworth",
+                "birthday": "02/13/1973"
+            },
+            {
+                "name": "Tormund Giantsbane",
+                "birthday": "12/14/1974"
+            },
+            {
+                "name": "Jeor Mormont",
+                "birthday": "11/01/1955"
+            },
+            {
+                "name": "Eddard Stark",
+                "birthday": "12/02/1963"
+            },
+            {
+                "name": "Khal Drogo",
+                "birthday": "12/05/1980"
+            },
+            {
+                "name": "Ramsay Bolton",
+                "birthday": "02/04/2020"
+            },
+            {
+                "name": "Robert Baratheon",
+                "birthday": "01/07/2020"
+            },
+            {
+                "name": "Daario Naharis",
+                "birthday": "04/14/2020"
+            },
+            {
+                "name": "Viserys Targaryen",
+                "birthday": "04/07/2020"
+            }
+            ]
+        </textarea>
+      </div>
+      <div>
+        <input type="text" id="year-input" />
+        <button id="update-btn">UPDATE</button>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
