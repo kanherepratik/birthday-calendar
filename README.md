@@ -1,3 +1,4 @@
+# Birthday Calendar
 A simple birthday Calendar App which shows birthday on a week long calendar for the given year.
 
 # Steps to run :
