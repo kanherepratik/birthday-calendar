@@ -14,8 +14,10 @@ updateBtn.addEventListener("click", () => {
   data = JSON.parse(document.querySelector("#json-data").value);
   const yearInputValue = parseInt(inputYearField.value);
   const result = filterDataByDay(data, yearInputValue);
-  isUpdateClicked = yearInputValue ? true : false;
-  fillBirthdays(result);
+  if (result) {
+    isUpdateClicked = true;
+    fillBirthdays(result);
+  }
 });
 
 // reset on clicking the button for second time
@@ -33,55 +35,61 @@ const fillBirthdays = birthdayData => {
     const dayDiv = document.getElementById(day);
     const fragment = document.createDocumentFragment();
     // calculate number of boxes for perticular day
-    const requiredBoxes = getNumberOfBox(birthdayData[day].length);
-
-    // fill box with name and set width and height
-    for (let i = 0; i < requiredBoxes; i++) {
-      const boxDiv = document.createElement("div");
-      const boxSize = `${100 / Math.sqrt(requiredBoxes)}%`;
-      const boxBackground = `${getRandomColor()}`;
-      boxDiv.setAttribute("class", "box");
-      if (birthdayData[day][i]) {
-        boxDiv.setAttribute(
-          "style",
-          `background-color:${boxBackground}; width:${boxSize};height:${boxSize}`
-        );
-        boxDiv.innerHTML = birthdayData[day][i].name;
-      } else {
-        boxDiv.setAttribute("style", `width:${boxSize};height:${boxSize}`);
+    if (birthdayData[day].length) {
+      const requiredBoxes = getNumberOfBox(birthdayData[day].length);
+      // fill box with name and set width and height
+      for (let i = 0; i < requiredBoxes; i++) {
+        const boxDiv = document.createElement("div");
+        const boxSize = `${100 / Math.sqrt(requiredBoxes)}%`;
+        const boxBackground = `${getRandomColor()}`;
+        boxDiv.setAttribute("class", "box");
+        if (birthdayData[day][i]) {
+          boxDiv.setAttribute(
+            "style",
+            `background-color:${boxBackground}; width:${boxSize};height:${boxSize}`
+          );
+          boxDiv.innerHTML = birthdayData[day][i].name;
+        } else {
+          boxDiv.setAttribute("style", `width:${boxSize};height:${boxSize}`);
+        }
+        fragment.appendChild(boxDiv);
       }
-      fragment.appendChild(boxDiv);
+    } else {
+      const noBirthdayDiv = document.createElement("div");
+      noBirthdayDiv.setAttribute("class", "no-birthday");
+      noBirthdayDiv.innerHTML = "No Birthdays Today (YOLO !!)";
+      fragment.appendChild(noBirthdayDiv);
     }
+
     dayDiv.appendChild(fragment);
   });
 };
 
 // filter and prepare data by day
 const filterDataByDay = (data, inputYear) => {
-  if (!data.length) {
-    return false;
-  }
-  const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-  const requiredData = data
-    .filter(({ birthday }) => new Date(birthday).getFullYear() === inputYear)
-    .reduce((acc, cur) => {
-      const date = new Date(cur.birthday).getDate();
-      const month = new Date(cur.birthday).getMonth();
-      const year = new Date(cur.birthday).getFullYear();
-      const dateObj = new Date(year, month, date);
+  if (data.length && inputYear) {
+    const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const requiredData = data
+      .filter(({ birthday }) => new Date(birthday).getFullYear() === inputYear)
+      .reduce((acc, cur) => {
+        const date = new Date(cur.birthday).getDate();
+        const month = new Date(cur.birthday).getMonth();
+        const year = new Date(cur.birthday).getFullYear();
+        const dateObj = new Date(year, month, date);
 
-      // get day of birthday
-      const day = daysOfWeek[dateObj.getDay()];
-      acc[day] = (acc[day] || []).concat({
-        name: cur.name
-          .split(" ")
-          .map(x => x[0].toUpperCase())
-          .join(""),
-        birthday: dateObj
-      });
-      return acc;
-    }, {});
-  return sortByAge(requiredData);
+        // get day of birthday
+        const day = daysOfWeek[dateObj.getDay()];
+        acc[day] = acc[day].concat({
+          name: cur.name
+            .split(" ")
+            .map(x => x[0].toUpperCase())
+            .join(""),
+          birthday: dateObj
+        });
+        return acc;
+      }, Object.fromEntries(daysOfWeek.map(x => [x, []])));
+    return sortByAge(requiredData);
+  }
 };
 
 // sort the data in each day by age (youngest first)
