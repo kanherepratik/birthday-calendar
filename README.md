@@ -11,4 +11,4 @@ A simple birthday Calendar App which shows birthday on a week long calendar for 
 
 # Screenshot :
 
-![](image.png)
+<img width="1275" alt="Screen Shot 2020-02-26 at 7 34 04 PM" src="https://user-images.githubusercontent.com/14325407/75352257-786b6480-58cf-11ea-917b-2168259e4abb.png">
