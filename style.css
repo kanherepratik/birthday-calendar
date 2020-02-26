@@ -23,7 +23,7 @@ body {
 }
 
 .day {
-  background-color: purple;
+  background-color: mediumpurple;
   color: #fff;
   border-radius: 4px 4px 0px 0px;
   padding: 10px;
@@ -81,4 +81,9 @@ body {
 .update-btn {
   background-color: dodgerblue;
   height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
