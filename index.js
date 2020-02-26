@@ -4,18 +4,21 @@ const inputYearField = document.getElementById("year-input");
 let isUpdateClicked = false;
 
 updateBtn.addEventListener("click", () => {
+  // check if user is clicking the button for second time
   if (isUpdateClicked) {
     clearBirthdayCards();
     isUpdateClicked = false;
     return false;
   }
+  // extract data from textarea field
   data = JSON.parse(document.querySelector("#json-data").value);
   const yearInputValue = parseInt(inputYearField.value);
   const result = filterDataByDay(data, yearInputValue);
-  isUpdateClicked = true;
+  isUpdateClicked = yearInputValue ? true : false;
   fillBirthdays(result);
 });
 
+// reset on clicking the button for second time
 const clearBirthdayCards = () => {
   const boxContainerList = document.querySelectorAll(".inner");
   for (let i = 0; i < boxContainerList.length; i++) {
@@ -24,6 +27,7 @@ const clearBirthdayCards = () => {
   inputYearField.value = "";
 };
 
+// create dynamic boxes and fill in day cards
 const fillBirthdays = birthdayData => {
   Object.keys(birthdayData).forEach(day => {
     const dayDiv = document.getElementById(day);
@@ -54,7 +58,7 @@ const fillBirthdays = birthdayData => {
 
 // filter and prepare data by day
 const filterDataByDay = (data, inputYear) => {
-  if (!data.length && !inputYear) {
+  if (!data.length) {
     return false;
   }
   const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
@@ -62,9 +66,11 @@ const filterDataByDay = (data, inputYear) => {
     .filter(({ birthday }) => new Date(birthday).getFullYear() === inputYear)
     .reduce((acc, cur) => {
       const date = new Date(cur.birthday).getDate();
-      const month = new Date(cur.birthday).getMonth() + 1;
+      const month = new Date(cur.birthday).getMonth();
       const year = new Date(cur.birthday).getFullYear();
-      const dateObj = new Date(year, month - 1, date);
+      const dateObj = new Date(year, month, date);
+
+      // get day of birthday
       const day = daysOfWeek[dateObj.getDay()];
       acc[day] = (acc[day] || []).concat({
         name: cur.name
